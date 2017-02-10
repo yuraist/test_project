@@ -1,0 +1,34 @@
+{% extends 'base/base.html' %}
+{% load pipeline %}
+
+
+{% block content %}
+    <div id="tasks-view">
+
+    </div>
+{% endblock %}
+
+
+{% block extra_js %}
+
+
+    {% include 'base/js_templates/task.html' %}
+
+    {% javascript 'tasks' %}
+
+    <script type="text/javascript">
+        (function(){
+            $(document).ready(function () {
+
+                var view = new App.views.TasksListView({
+                    el: '#tasks-view',
+                    urls: {
+                        getTasks: '{% url 'get_tasks' %}'
+                    }
+                });
+
+            });
+        }())
+    </script>
+
+{% endblock %}

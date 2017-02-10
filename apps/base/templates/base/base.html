@@ -1,0 +1,43 @@
+{% load pipeline %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Tasks system{% endblock %}</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    {% stylesheet 'libs' %}
+    {% stylesheet 'base' %}
+</head>
+<body>
+
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container main-layout">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    Tasks system
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-container" class="container main-layout">
+        <div id="page-content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    {% javascript 'libs' %}
+
+    <script type="text/javascript">
+        (function () {
+            var ns = window.App = {};
+        })();
+    </script>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

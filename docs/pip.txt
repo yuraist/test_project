@@ -1,0 +1,4 @@
+# install via `pip install -r pip.txt`
+Django
+django-pipeline
+ipython
