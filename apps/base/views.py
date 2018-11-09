@@ -67,7 +67,13 @@ class GetOpenTasksView(LoginRequiredMixin, View):
 class GetInProgressTasksView(LoginRequiredMixin, View):
 
     def get(self, *args, **kwargs):
-        print('GetInProgressTasksView')
+        current_user = self.request.user
+        query = Q(status=20) & Q(assignee=current_user)
+
+        tasks = Task.objects.filter(query)
+        json = represent_in_json_format(tasks)
+
+        return JsonResponse(json)
 
 
 class GetFinishedTasksView(LoginRequiredMixin, View):
