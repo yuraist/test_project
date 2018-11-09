@@ -24,6 +24,14 @@ __all__ = (
 )
 
 
+def represent_in_json_format(tasks):
+    json_tasks = [task.json_representations() for task in tasks]
+    json = {
+        'tasks': json_tasks
+    }
+    return json
+
+
 class IndexView(LoginRequiredMixin, TemplateView):
     template_name = 'base/index.html'
 
@@ -42,20 +50,18 @@ class GetAllTasksView(LoginRequiredMixin, View):
         query = Q(status=1) | Q(assignee=current_user)
 
         tasks = Task.objects.filter(query)
+        json = represent_in_json_format(tasks)
 
-        json_tasks = [task.json_representations() for task in tasks]
-
-        json = {
-            'tasks': json_tasks
-        }
         return JsonResponse(json)
-
 
 
 class GetOpenTasksView(LoginRequiredMixin, View):
 
     def get(self, *args, **kwargs):
-        print('GetOpenTasksView')
+        tasks = Task.objects.filter(status=1)
+        json = represent_in_json_format(tasks)
+
+        return JsonResponse(json)
 
 
 class GetInProgressTasksView(LoginRequiredMixin, View):
