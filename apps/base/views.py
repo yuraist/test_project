@@ -8,7 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.views import View
 from django.views.generic import TemplateView
+from django.db.models import Q
 
+from .models import Task
 
 __all__ = (
     b'IndexView',
@@ -36,34 +38,45 @@ class GetTasksView(LoginRequiredMixin, View):
 class GetAllTasksView(LoginRequiredMixin, View):
 
     def get(self, *args, **kwargs):
-        pass
+        current_user = self.request.user
+        query = Q(status=1) | Q(assignee=current_user)
+
+        tasks = Task.objects.filter(query)
+
+        json_tasks = [task.json_representations() for task in tasks]
+
+        json = {
+            'tasks': json_tasks
+        }
+        return JsonResponse(json)
+
 
 
 class GetOpenTasksView(LoginRequiredMixin, View):
 
     def get(self, *args, **kwargs):
-        pass
+        print('GetOpenTasksView')
 
 
 class GetInProgressTasksView(LoginRequiredMixin, View):
 
     def get(self, *args, **kwargs):
-        pass
+        print('GetInProgressTasksView')
 
 
 class GetFinishedTasksView(LoginRequiredMixin, View):
 
     def get(self, *args, **kwargs):
-        pass
+        print('GetFinishedTasksView')
 
 
 class AcceptTaskView(LoginRequiredMixin, View):
 
     def put(self, *args, **kwargs):
-        pass
+        print('AcceptTaskView')
 
 
 class FinishTaskView(LoginRequiredMixin, View):
 
     def put(self, *args, **kwargs):
-        pass
+        print('FinishTaskView')
