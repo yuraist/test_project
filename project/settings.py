@@ -149,6 +149,7 @@ PIPELINE_JAVASCRIPT = {
     },
     'tasks': {
         'source_filenames': (
+            'base/js/app.js',
             'base/js/models.js',
             'base/js/TaskView.js',
             'base/js/TasksListView.js',

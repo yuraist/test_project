@@ -3,32 +3,32 @@
 
 
 {% block content %}
-    <div id="tasks-view">
+  <ul class="nav nav-tabs" id="#tabs">
+    <li role="presentation" class="active">
+      <a onclick="changeMenuActiveTab(this);">Все заказы</a>
+    </li>
+    <li role="presentation">
+      <a onclick="changeMenuActiveTab(this);">Ожидающие</a>
+    </li>
+    <li role="presentation">
+      <a onclick="changeMenuActiveTab(this);">Принятые</a>
+    </li>
+    <li role="presentation">
+      <a onclick="changeMenuActiveTab(this);">Выполненные</a>
+    </li>
+  </ul>
 
-    </div>
+  <div id="tasks-view">
+
+  </div>
 {% endblock %}
 
 
 {% block extra_js %}
 
 
-    {% include 'base/js_templates/task.html' %}
+  {% include 'base/js_templates/task.html' %}
 
-    {% javascript 'tasks' %}
-
-    <script type="text/javascript">
-        (function(){
-            $(document).ready(function () {
-
-                var view = new App.views.TasksListView({
-                    el: '#tasks-view',
-                    urls: {
-                        getTasks: '{% url 'get_tasks' %}'
-                    }
-                });
-
-            });
-        }())
-    </script>
+  {% javascript 'tasks' %}
 
 {% endblock %}
