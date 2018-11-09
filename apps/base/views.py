@@ -112,5 +112,13 @@ class FinishTaskView(LoginRequiredMixin, View):
         id = kwargs['id']
         task = Task.objects.filter(id=id).first()
 
+        if task.assignee is None:
+            task.assignee = self.request.user
+
+        if task.status != 30:
+            task.status = 30
+
+        task.save()
+
         json = task.json_representation()
         return JsonResponse(json)
