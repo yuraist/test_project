@@ -30,7 +30,7 @@ class Task(models.Model):
     assignee = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tasks', null=True, blank=True)
     status = models.SmallIntegerField(choices=TaskStatus.CHOICES, default=TaskStatus.OPEN)
 
-    def json_representations(self):
+    def json_representation(self):
         json = {
             'text': self.text,
             'link': self.link,
