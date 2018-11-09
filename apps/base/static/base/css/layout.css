@@ -31,3 +31,33 @@ body {
 #page-content {
   padding: 15px;
 }
+
+#app {
+  margin-top: 20px;
+}
+
+#app ul {
+  list-style: none;
+  padding: 0;
+}
+
+h3.panel-title {
+  display: inline-block;
+}
+
+span.label {
+  display: inline-block;
+  float: right;
+  margin-top: 3px;
+}
+
+.task-description {
+  display: inline-block;
+  width: 55%;
+}
+
+.task-action {
+  display: inline-block;
+  float: right;
+  width: 240px;
+}
