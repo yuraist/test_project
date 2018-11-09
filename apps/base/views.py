@@ -13,6 +13,12 @@ from django.views.generic import TemplateView
 __all__ = (
     b'IndexView',
     b'GetTasksView',
+    b'GetAllTasksView',
+    b'GetOpenTasksView',
+    b'GetInProgressTasksView',
+    b'GetFinishedTasksView',
+    b'AcceptTaskView',
+    b'FinishTaskView',
 )
 
 
@@ -25,3 +31,39 @@ class GetTasksView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         items = []
         return JsonResponse({'items': items})
+
+
+class GetAllTasksView(LoginRequiredMixin, View):
+
+    def get(self, *args, **kwargs):
+        pass
+
+
+class GetOpenTasksView(LoginRequiredMixin, View):
+
+    def get(self, *args, **kwargs):
+        pass
+
+
+class GetInProgressTasksView(LoginRequiredMixin, View):
+
+    def get(self, *args, **kwargs):
+        pass
+
+
+class GetFinishedTasksView(LoginRequiredMixin, View):
+
+    def get(self, *args, **kwargs):
+        pass
+
+
+class AcceptTaskView(LoginRequiredMixin, View):
+
+    def put(self, *args, **kwargs):
+        pass
+
+
+class FinishTaskView(LoginRequiredMixin, View):
+
+    def put(self, *args, **kwargs):
+        pass
