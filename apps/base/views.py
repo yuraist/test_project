@@ -25,7 +25,7 @@ __all__ = (
 
 
 def represent_in_json_format(tasks):
-    json_tasks = [task.json_representations() for task in tasks]
+    json_tasks = [task.json_representation() for task in tasks]
     json = {
         'tasks': json_tasks
     }
@@ -91,10 +91,26 @@ class GetFinishedTasksView(LoginRequiredMixin, View):
 class AcceptTaskView(LoginRequiredMixin, View):
 
     def put(self, *args, **kwargs):
-        print('AcceptTaskView')
+        id = kwargs['id']
+        task = Task.objects.filter(id=id).first()
+
+        if task.assignee is None:
+            task.assignee = self.request.user
+
+        if task.status != 20 and task.status != 30:
+            task.status = 20
+
+        task.save()
+
+        json = task.json_representation()
+        return JsonResponse(json)
 
 
 class FinishTaskView(LoginRequiredMixin, View):
 
     def put(self, *args, **kwargs):
-        print('FinishTaskView')
+        id = kwargs['id']
+        task = Task.objects.filter(id=id).first()
+
+        json = task.json_representation()
+        return JsonResponse(json)
