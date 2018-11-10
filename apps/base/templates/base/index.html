@@ -29,6 +29,9 @@
 
   {% include 'base/js_templates/task.html' %}
 
+  <script>
+    const csrf = '{{ csrf_token }}';
+  </script>
   {% javascript 'tasks' %}
 
 {% endblock %}
