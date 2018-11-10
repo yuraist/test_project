@@ -1,9 +1,16 @@
+var current_tab = 'Все заказы';
+
 function changeMenuActiveTab(button) {
     $('.nav-tabs li').removeClass('active');
     $(button).parent().addClass('active');
 
-    const selectedTab = $(button).text();
-    switch (selectedTab) {
+    current_tab = $(button).text();
+
+    reloadTab(current_tab)
+}
+
+function reloadTab(tab) {
+    switch (tab) {
         case 'Все заказы':
             loadAllTasks();
             break;
@@ -48,11 +55,25 @@ function loadFinishedTasks() {
 }
 
 function acceptTask(id) {
-    console.log('accept task ' + id);
+    $.ajax({
+        url: '/accept_task/' + id + '/',
+        type: 'PUT',
+        headers: {'X-CSRFToken': csrf},
+        success: function() {
+            reloadTab(current_tab);
+        }
+    })
 }
 
 function finishTask(id) {
-    console.log('finish task ' + id);
+    $.ajax({
+        url: '/finish_task/' + id + '/',
+        type: 'PUT',
+        headers: {'X-CSRFToken': csrf},
+        success: function() {
+            reloadTab(current_tab);
+        }
+    })
 }
 
 function createTasksList(tasks) {
