@@ -32,6 +32,7 @@ class Task(models.Model):
 
     def json_representation(self):
         json = {
+            'id': self.id,
             'text': self.text,
             'link': self.link,
             'price': self.price,
