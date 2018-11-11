@@ -17,5 +17,10 @@ class TaskAdmin(admin.ModelAdmin):
     )
     list_select_related = ('assignee',)
 
+    def save_model(self, request, obj, form, change):
+        if obj.author is None:
+            obj.author = request.user
+        obj.save()
+
 
 admin.site.register(models.Task, TaskAdmin)

@@ -28,6 +28,7 @@ class Task(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     assignee = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tasks', null=True, blank=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='created_tasks', null=True, blank=True)
     status = models.SmallIntegerField(choices=TaskStatus.CHOICES, default=TaskStatus.OPEN)
 
     def json_representation(self):
